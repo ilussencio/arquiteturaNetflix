@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="newsletter" />
+        <module name="config-server" />
         <module name="Logs" />
         <module name="eureka-server" />
         <module name="api-gateway-server" />
@@ -18,6 +19,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Logs" options="-parameters" />
       <module name="api-gateway-server" options="-parameters" />
+      <module name="config-server" options="-parameters" />
       <module name="eureka-server" options="-parameters" />
       <module name="newsletter" options="-parameters" />
     </option>

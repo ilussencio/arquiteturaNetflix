@@ -1,16 +1,20 @@
 spring:
   application:
     name: eureka-client-logs
+  profiles:
+    active: prod
+  config:
+    import: optional:configserver:http://localhost:8888
   data:
-    mongdb:
+    mongodb:
       port: 27017
-      host: localhost
+      host: 192.168.100.27
       database: newsletter
-    rabbitmq:
-      host: localhost
-      port: 5672
-      username: guest
-      password: guest
+  rabbitmq:
+    host: 192.168.100.27
+    port: 5672
+    username: guest
+    password: password
 server:
   port: ${PORT:0}
 eureka:
