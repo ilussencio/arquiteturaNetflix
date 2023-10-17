@@ -12,6 +12,7 @@
         <module name="Logs" />
         <module name="eureka-server" />
         <module name="api-gateway-server" />
+        <module name="push-notification" />
       </profile>
     </annotationProcessing>
   </component>
@@ -22,6 +23,7 @@
       <module name="config-server" options="-parameters" />
       <module name="eureka-server" options="-parameters" />
       <module name="newsletter" options="-parameters" />
+      <module name="push-notification" options="-parameters" />
     </option>
   </component>
 </project>

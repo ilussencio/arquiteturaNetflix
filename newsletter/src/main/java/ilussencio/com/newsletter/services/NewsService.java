@@ -2,6 +2,7 @@ package ilussencio.com.newsletter.services;
 
 import ilussencio.com.newsletter.mensages.RabbitMqSendLog;
 import ilussencio.com.newsletter.models.News;
+import ilussencio.com.newsletter.models.NotificationMessage;
 import ilussencio.com.newsletter.models.dto.LogDTO;
 import ilussencio.com.newsletter.models.dto.NewsDTO;
 import ilussencio.com.newsletter.repositories.NewsRepository;
@@ -9,9 +10,11 @@ import ilussencio.com.newsletter.repositories.PostRepository;
 import ilussencio.com.newsletter.repositories.TagRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,6 +24,12 @@ public class NewsService {
     private NewsRepository newsRepository;
     @Autowired
     private RabbitMqSendLog rabbitMqSendLog;
+
+    @Value("${firebase.token}")
+    private String tokenFirebase;
+
+    @Autowired
+    private NotificationService notificationService;
 
     public ResponseEntity<List<NewsDTO>> findAll() {
         var dbNews = newsRepository.findAll();
@@ -47,7 +56,18 @@ public class NewsService {
         System.out.println(newsDTO.toNews());
         var dbNews = newsRepository.save(newsDTO.toNews());
 
+
+
         rabbitMqSendLog.sendLog(new LogDTO<NewsDTO>("created", new NewsDTO(dbNews)));
+
+        notificationService.sendNotification(
+                new NotificationMessage(
+                        tokenFirebase,
+                        "SAVE",
+                        "NOVA NEWSLETTER",
+                        "image",
+                        new HashMap<>()
+                ));
         return ResponseEntity.ok(new NewsDTO(dbNews));
     }
 
@@ -78,6 +98,15 @@ public class NewsService {
         newsRepository.delete(dbNews.get());
 
         rabbitMqSendLog.sendLog(new LogDTO<NewsDTO>("delete", new NewsDTO(dbNews.get())));
+
+        notificationService.sendNotification(
+                new NotificationMessage(
+                        tokenFirebase,
+                        "DELETE",
+                        "NEWS LETTER DELETADA",
+                        "image",
+                        new HashMap<>()
+                ));
 
         return ResponseEntity.ok().build();
     }
