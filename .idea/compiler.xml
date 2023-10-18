@@ -12,9 +12,11 @@
         <module name="Logs" />
         <module name="eureka-server" />
         <module name="api-gateway-server" />
-        <module name="push-notification" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="push-notification" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
