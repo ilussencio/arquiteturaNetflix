@@ -1,0 +1,13 @@
+version: '3.7'
+
+services:
+  eureka-server:
+    image: ilussencio/eureka-server
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8761:8761"
+    environment:
+      - APP_PROFILE=prod
+      - CONFIG_SERVER=http://192.168.100.27:8888

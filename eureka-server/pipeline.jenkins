@@ -2,22 +2,14 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
+        stage('Clean Package') {
             steps {
-                // Checkout your microservice source code
-                echo 'Checkout'
-            }
-        }
-        stage('Pull Configurations') {
-            steps {
-                // Pull necessary configurations from the Config Server's Git repository
-                echo 'Pull'
+                mvn clean package
             }
         }
         stage('Build & Test') {
             steps {
-                // Compile, test, and package your microservice
-                echo 'Build e Test'
+                docker build -t ilussencio/eureka-server:latest .
             }
         }
         stage('Deploy') {
