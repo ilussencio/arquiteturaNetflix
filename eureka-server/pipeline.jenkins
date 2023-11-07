@@ -9,7 +9,7 @@ pipeline {
         }
         stage('Build & Test') {
             steps {
-                docker build -t ilussencio/eureka-server:latest .
+                sh "docker build -t ilussencio/eureka-server:latest ."
             }
         }
         stage('Deploy') {
