@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clean Package') {
             steps {
-                whithMaven(
+                withMaven(
                     mavenLocalRepo: 'eureka-server',
                 ){
                     sh "mvn clean package"
