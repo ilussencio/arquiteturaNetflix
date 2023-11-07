@@ -4,7 +4,8 @@ pipeline {
     stages {
         stage('Clean Package') {
             steps {
-                sh "cd eureka-server | mvn clean package"
+                sh "cd eureka-server"
+                sh "mvn clean package"
             }
         }
         stage('Build & Test') {
