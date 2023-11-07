@@ -4,12 +4,16 @@ pipeline {
     stages {
         stage('Clean Package') {
             steps {
-                sh "cd eureka-server"
-                sh "mvn clean package"
+                whithMaven(
+                    mavenLocalRepo: 'eureka-server',
+                ){
+                    sh "mvn clean package"
+                }                
             }
         }
         stage('Build & Test') {
             steps {
+                
                 sh "docker build -t ilussencio/eureka-server:latest ."
             }
         }
