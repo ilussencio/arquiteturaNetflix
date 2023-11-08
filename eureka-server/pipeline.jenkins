@@ -5,7 +5,7 @@ pipeline {
         stage('Clean Package') {
             steps {
                 withMaven() {
-                    sh "mvn clean package"
+                    sh "mvn clean package -f ./eureka-server/pom.xml"
                 }
             }
         }
