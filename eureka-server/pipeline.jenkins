@@ -5,10 +5,8 @@ pipeline {
         stage('Clean Package') {
             steps {
                 withMaven(
-                    maven: 'maven-3', // (1)
-                    // Use `$WORKSPACE/.repository` for local repository folder to avoid shared repositories
-                    mavenLocalRepo: '.repository',
-                    
+                    maven: 'maven-3',
+                    mavenLocalRepo: './eureka-server',
                     mavenSettingsConfig: 'my-maven-settings'
                 ) {
                   // Run the maven build
