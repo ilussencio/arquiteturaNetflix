@@ -4,12 +4,8 @@ pipeline {
     stages {
         stage('Clean Package') {
             steps {
-                withMaven(
-                    maven: 'maven-3',
-                    mavenLocalRepo: './eureka-server',
-                    mavenSettingsConfig: 'my-maven-settings'
-                ) {
-                    sh "mvn clean verify"
+                withMaven() {
+                    sh "mvn clean package"
                 }
             }
         }
