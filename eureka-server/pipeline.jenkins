@@ -9,8 +9,6 @@ pipeline {
                     mavenLocalRepo: './eureka-server',
                     mavenSettingsConfig: 'my-maven-settings'
                 ) {
-                  // Run the maven build
-                    echo $WORKSPACE
                     sh "mvn clean verify"
                 }
             }
