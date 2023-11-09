@@ -1,7 +1,5 @@
 pipeline {
-    agent {
-        docker {image 'openjdk:21-ea-17-slim-buster'}
-    }
+    agent any
     stages {
         stage('Test'){
             steps {
@@ -15,10 +13,12 @@ pipeline {
                 }
             }
         }
+        
         stage('Build & Test') {
+            agent { dockerfile true }
             steps {
-                
-                sh "docker build -t ilussencio/eureka-server:latest ./eureka-server"
+                sh 'ls'
+                //sh "docker build -t ilussencio/eureka-server:latest ./eureka-server"
             }
         }
         stage('Deploy') {
