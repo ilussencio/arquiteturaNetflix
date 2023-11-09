@@ -1,11 +1,17 @@
 pipeline {
-    agent any
-
+    agent {
+        docker {image 'openjdk:21-ea-17-slim-buster'}
+    }
     stages {
+        stage('Test'){
+            steps {
+                sh 'java --version'
+            }
+        }
         stage('Clean Package') {
             steps {
                 withMaven() {
-                    sh "mvn clean package -f ./eureka-server/pom.xml"
+                    sh 'mvn clean package -f ./eureka-server/pom.xml'
                 }
             }
         }
